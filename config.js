@@ -48,7 +48,10 @@ const CONFIG = {
   // Todos null hasta que lleguen los archivos a NR-ACADEMIA-CARGAR en el Escritorio.
   // Rutas esperadas una vez cargados: "assets/logo.png" (o .svg), "assets/hero.mp4", "assets/academia.jpg".
   logoUrl: null,
-  heroVideo: null,
+  // Video de pádel real, recortado a un tramo limpio sin logos de marca y
+  // armado como loop ida-y-vuelta (2.4s) para que no se note el salto.
+  // Reemplazar por el hero.mp4 real de Nacho en cuanto esté disponible.
+  heroVideo: "assets/hero.mp4",
   academiaFoto: null,
 
   // ---- Tipos de clases ----
