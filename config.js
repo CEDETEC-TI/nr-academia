@@ -38,20 +38,22 @@ const CONFIG = {
     // PROVISORIO: bio mínima armada solo con los datos confirmados (nada inventado).
     // Falta la historia real de Nacho como jugador y profe (llega en audio) para reemplazar esto.
     bio: "Profesor y fundador de NR Academia en Le Club Formosa. Se anima a cada alumno con disponibilidad, ganas, responsabilidad y valores, desde el primer día hasta la competencia.",
-    // PROVISORIO: todavía no hay foto real de Nacho (sesión de fotos el 5/11).
-    // Se deja sin foto (placeholder con iniciales) para no mostrar a otra persona con su nombre.
-    // Cuando llegue nacho.jpg a assets/, poner acá "assets/nacho.jpg".
-    foto: null,
+    // Foto real tomada de uno de los videos que subió Guillermo (IMG_1207), con buena luz
+    // natural y sin logos de marca en cuadro. Reemplazar por una foto de estudio cuando
+    // esté la sesión de fotos del 5/11, si Nacho prefiere otra.
+    foto: "assets/nacho.jpg",
   },
 
   // ---- Assets reales (logo, video de fondo, foto de la academia) ----
   // Todos null hasta que lleguen los archivos a NR-ACADEMIA-CARGAR en el Escritorio.
   // Rutas esperadas una vez cargados: "assets/logo.png" (o .svg), "assets/hero.mp4", "assets/academia.jpg".
   logoUrl: null,
-  // Video de pádel real, recortado a un tramo limpio sin logos de marca y
-  // armado como loop ida-y-vuelta (2.4s) para que no se note el salto.
-  // Reemplazar por el hero.mp4 real de Nacho en cuanto esté disponible.
+  // Video real de Le Club Formosa (de los 5 que subió Guillermo), recortado
+  // a un tramo limpio de 7s sin logos de marca y armado como loop ida-y-vuelta
+  // (14s) para que no se note el corte. Versión escritorio y versión celular.
   heroVideo: "assets/hero.mp4",
+  heroVideoMobile: "assets/hero-mobile.mp4",
+  heroPoster: "assets/hero-poster.jpg",
   academiaFoto: null,
 
   // ---- Tipos de clases ----
@@ -76,6 +78,9 @@ const CONFIG = {
     paraQuien: "Para todos: chicos, mujeres, principiantes y competidores.",
     diferencial: "Disponibilidad, ganas, responsabilidad y valores.",
     alumnos: "+30 alumnos entrenando",
+    // Foto real de acción (un alumno entrenando en la cancha), de uno de los videos
+    // que subió Guillermo (IMG_1211). No identifica a nadie en particular.
+    foto: "assets/alumnos.jpg",
   },
 
   // ---- Novedades (1 sola tarjeta, real — no es contenido de ejemplo) ----

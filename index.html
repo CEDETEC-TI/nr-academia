@@ -204,6 +204,17 @@
   .porque-card .label { font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--bordo); margin-bottom: 10px; }
   .porque-card p { font-size: 1.02rem; color: var(--ink); font-family: var(--font-body); }
   .porque-card.stat p { font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; text-transform: uppercase; color: var(--bordo); }
+  .porque-card.stat.has-photo {
+    position: relative; background-size: cover; background-position: center; min-height: 220px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .porque-card.stat.has-photo::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(42,31,22,0.15) 0%, rgba(42,31,22,0.88) 100%);
+  }
+  .porque-card.stat.has-photo .label, .porque-card.stat.has-photo p { position: relative; z-index: 1; }
+  .porque-card.stat.has-photo .label { color: rgba(255,255,255,0.85); }
+  .porque-card.stat.has-photo p { color: #fff; }
 
   /* ---------- NOVEDADES ---------- */
   .novedades-grid { display: grid; grid-template-columns: 1fr; max-width: 640px; }
@@ -314,7 +325,7 @@
 
 <section class="hero" id="inicio">
   <div class="hero-bg" id="heroBg">
-    <img id="heroPoster" src="https://images.unsplash.com/photo-1673266893762-e8af9327ad1d?fm=jpg&q=80&w=1800&auto=format&fit=crop" alt="Canchas de pádel al atardecer, con montañas de fondo" loading="eager">
+    <img id="heroPoster" src="assets/hero-poster.jpg" alt="Cancha de pádel en Le Club Formosa" loading="eager">
   </div>
   <div class="hero-net"></div>
   <div class="hero-bar"></div>
@@ -458,13 +469,14 @@
     $('footBrand').innerHTML = logoImg;
   }
 
-  // ---- Foto de la academia (si ya está cargada, reemplaza el poster del hero) ----
-  if (CONFIG.academiaFoto) {
-    $('heroPoster').src = CONFIG.academiaFoto;
+  // ---- Foto de la academia / poster del hero ----
+  const posterSrc = CONFIG.heroPoster || CONFIG.academiaFoto;
+  if (posterSrc) {
+    $('heroPoster').src = posterSrc;
   }
 
-  // ---- Video de fondo del hero (si ya está cargado el archivo real) ----
-  if (CONFIG.heroVideo) {
+  // ---- Video de fondo del hero (versión celular/escritorio, si ya están cargadas) ----
+  if (CONFIG.heroVideo || CONFIG.heroVideoMobile) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const saveData = navigator.connection && navigator.connection.saveData;
     if (!prefersReducedMotion && !saveData) {
@@ -472,8 +484,11 @@
       video.id = 'heroVideo';
       video.autoplay = true; video.muted = true; video.loop = true; video.playsInline = true;
       video.setAttribute('aria-hidden', 'true');
-      video.poster = CONFIG.academiaFoto || $('heroPoster').src;
-      video.innerHTML = `<source src="${CONFIG.heroVideo}" type="video/mp4">`;
+      video.poster = posterSrc || $('heroPoster').src;
+      let sources = '';
+      if (CONFIG.heroVideoMobile) sources += `<source src="${CONFIG.heroVideoMobile}" type="video/mp4" media="(max-width: 767px)">`;
+      if (CONFIG.heroVideo) sources += `<source src="${CONFIG.heroVideo}" type="video/mp4">`;
+      video.innerHTML = sources;
       video.addEventListener('playing', () => video.classList.add('ready'));
       video.addEventListener('error', () => video.remove());
       $('heroBg').appendChild(video);
@@ -529,7 +544,7 @@
       <div class="label">Nuestro diferencial</div>
       <p>${esc(CONFIG.porQue.diferencial)}</p>
     </div>
-    <div class="porque-card stat reveal">
+    <div class="porque-card stat reveal${CONFIG.porQue.foto ? ' has-photo' : ''}"${CONFIG.porQue.foto ? ` style="background-image:url('${CONFIG.porQue.foto}')"` : ''}>
       <div class="label">Alumnos</div>
       <p>${esc(CONFIG.porQue.alumnos)}</p>
     </div>
