@@ -40,8 +40,16 @@ const CONFIG = {
     bio: "Profesor y fundador de NR Academia en Le Club Formosa. Se anima a cada alumno con disponibilidad, ganas, responsabilidad y valores, desde el primer día hasta la competencia.",
     // PROVISORIO: todavía no hay foto real de Nacho (sesión de fotos el 5/11).
     // Se deja sin foto (placeholder con iniciales) para no mostrar a otra persona con su nombre.
+    // Cuando llegue nacho.jpg a assets/, poner acá "assets/nacho.jpg".
     foto: null,
   },
+
+  // ---- Assets reales (logo, video de fondo, foto de la academia) ----
+  // Todos null hasta que lleguen los archivos a NR-ACADEMIA-CARGAR en el Escritorio.
+  // Rutas esperadas una vez cargados: "assets/logo.png" (o .svg), "assets/hero.mp4", "assets/academia.jpg".
+  logoUrl: null,
+  heroVideo: null,
+  academiaFoto: null,
 
   // ---- Tipos de clases ----
   clases: [
