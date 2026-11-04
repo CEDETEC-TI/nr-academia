@@ -38,10 +38,10 @@ const CONFIG = {
     // PROVISORIO: bio mínima armada solo con los datos confirmados (nada inventado).
     // Falta la historia real de Nacho como jugador y profe (llega en audio) para reemplazar esto.
     bio: "Profesor y fundador de NR Academia en Le Club Formosa. Se anima a cada alumno con disponibilidad, ganas, responsabilidad y valores, desde el primer día hasta la competencia.",
-    // Foto real tomada de uno de los videos que subió Guillermo (IMG_1207), con buena luz
-    // natural y sin logos de marca en cuadro. Reemplazar por una foto de estudio cuando
-    // esté la sesión de fotos del 5/11, si Nacho prefiere otra.
-    foto: "assets/nacho.jpg",
+    // Confirmado por Guillermo: la persona de IMG_1207 no es necesariamente Nacho —
+    // todavía no hay una foto real confirmada de él. Se deja sin foto (placeholder
+    // con iniciales) hasta que llegue una foto real y confirmada.
+    foto: null,
   },
 
   // ---- Assets reales (logo, video de fondo, foto de la academia) ----
