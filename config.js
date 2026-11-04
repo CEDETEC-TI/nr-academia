@@ -45,9 +45,10 @@ const CONFIG = {
   },
 
   // ---- Assets reales (logo, video de fondo, foto de la academia) ----
-  // Todos null hasta que lleguen los archivos a NR-ACADEMIA-CARGAR en el Escritorio.
-  // Rutas esperadas una vez cargados: "assets/logo.png" (o .svg), "assets/hero.mp4", "assets/academia.jpg".
-  logoUrl: null,
+  // Logo real de la academia ("Recurso 2.png" que subió Guillermo): pabellón
+  // verde con pelota, sin texto ni marcas de terceros. Reemplaza el wordmark
+  // de texto en el nav, el footer y el favicon.
+  logoUrl: "assets/logo.png",
   // Video real de Le Club Formosa (de los 5 que subió Guillermo), recortado
   // a un tramo limpio de 7s sin logos de marca y armado como loop ida-y-vuelta
   // (14s) para que no se note el corte. Versión escritorio y versión celular.
