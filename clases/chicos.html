@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clases para chicos — NR Academia</title>
+<meta name="description" content="Clases para chicos en NR Academia, Le Club Formosa, con Ignacio «Nacho» Román.">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<link rel="icon" id="favicon" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --paper: #ffffff;
+  --tint: #faf6f1;
+  --card: #ffffff;
+  --ink: #2a1f16;
+  --ink-soft: #6b5c4b;
+  --line: rgba(42,31,22,0.12);
+  --bordo: #7a1b3c;
+  --bordo-dark: #5c1430;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; overscroll-behavior-y: none; }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-body); line-height: 1.55; overflow-x: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font-family: inherit; border: none; background: none; cursor: pointer; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+section { padding: 128px 0; scroll-margin-top: 76px; }
+section:nth-of-type(even) { background: var(--tint); }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; line-height: 1.05; text-wrap: balance; }
+a, button, [role="button"] { touch-action: manipulation; }
+
+.eyebrow { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--bordo); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+.section-head { max-width: 580px; margin-bottom: 64px; }
+.section-head h2 { font-size: clamp(2.2rem, 5vw, 3.2rem); text-transform: none; }
+.section-head p { color: var(--ink-soft); font-size: 1.05rem; margin-top: 12px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-display); font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.02em;
+  padding: 16px 28px; cursor: pointer;
+  transition: transform 140ms var(--ease-out), background 140ms var(--ease-out), box-shadow 140ms var(--ease-out), border-color 140ms var(--ease-out);
+  user-select: none; -webkit-user-select: none;
+}
+.btn:active { transform: scale(0.97); }
+.btn-bordo { background: var(--bordo); color: #fff; clip-path: polygon(0 0, 100% 0, 92% 100%, 0% 100%); }
+@media (hover: hover) and (pointer: fine) { .btn-bordo:hover { background: var(--bordo-dark); box-shadow: 0 0 24px rgba(122,27,60,0.35); } }
+.btn-outline { border: 2px solid var(--bordo); color: var(--bordo); padding: 14px 26px; }
+@media (hover: hover) and (pointer: fine) { .btn-outline:hover { background: rgba(122,27,60,0.07); } }
+.btn-big { padding: 20px 36px; font-size: 1.1rem; }
+
+header.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 20px 0; background: #fff; transition: padding 200ms var(--ease-out), box-shadow 200ms var(--ease-out); }
+header.nav.scrolled { box-shadow: 0 1px 0 var(--line); padding: 14px 0; }
+nav.container { display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.02em; display: flex; align-items: center; gap: 9px; color: var(--ink); }
+.logo .dot { width: 9px; height: 9px; background: var(--bordo); flex-shrink: 0; }
+.logo img { height: 28px; width: auto; display: block; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a:not(.btn) { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); transition: color 150ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .nav-links a:not(.btn):hover { color: var(--bordo); } }
+.nav-links .btn { padding: 11px 20px; font-size: 0.82rem; }
+.burger { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; }
+.burger span, .burger span::before, .burger span::after { content: ""; display: block; width: 20px; height: 2px; background: var(--ink); position: relative; transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out), background 200ms var(--ease-out); }
+.burger span::before { position: absolute; top: -6px; }
+.burger span::after { position: absolute; top: 6px; }
+.burger.open span { background: transparent; }
+.burger.open span::before { top: 0; transform: rotate(45deg); background: var(--bordo); }
+.burger.open span::after { top: 0; transform: rotate(-45deg); background: var(--bordo); }
+
+.hero { position: relative; min-height: 78svh; display: flex; align-items: flex-end; padding: 0 0 64px; color: #fff; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img, .hero-bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.8) contrast(1.06) brightness(0.82); }
+.hero-bg video { opacity: 0; transition: opacity 700ms var(--ease-out); }
+.hero-bg video.ready { opacity: 1; }
+.hero-bg::after { content: ""; position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(38,14,22,0.45) 0%, rgba(38,14,22,0.35) 40%, rgba(26,10,16,0.95) 100%); }
+.hero-content { position: relative; z-index: 2; padding-top: 120px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 0.88rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(255,255,255,0.75); margin-bottom: 28px; transition: color 150ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .back-link:hover { color: #fff; } }
+.hero h1 { font-size: clamp(2.6rem, 7vw, 4.4rem); font-style: italic; text-transform: uppercase; color: #fff; }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-group .reveal:nth-child(1) { transition-delay: 0ms; }
+.reveal-group .reveal:nth-child(2) { transition-delay: 60ms; }
+.reveal-group .reveal:nth-child(3) { transition-delay: 120ms; }
+.reveal-group .reveal:nth-child(4) { transition-delay: 180ms; }
+
+.para-quien p { font-size: 1.2rem; color: var(--ink); max-width: 640px; line-height: 1.6; }
+
+.trabaja-list { max-width: 640px; }
+.trabaja-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
+.trabaja-list li:last-child { border-bottom: none; }
+.trabaja-list li::before { content: ""; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--bordo); margin-top: 9px; }
+
+.stat-row { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); max-width: 640px; }
+.stat-row:last-child { border-bottom: none; }
+.stat-row .k { font-family: var(--font-display); font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--ink-soft); flex-shrink: 0; }
+.stat-row .v { font-size: 1.05rem; text-align: right; }
+.stat-row .v .confirm { color: var(--bordo); font-weight: 600; }
+
+.precios-list { max-width: 560px; margin-bottom: 28px; }
+.precio-row { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.precio-row:last-child { border-bottom: none; }
+.precio-row .nombre { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.precio-row .nombre small { display: block; font-family: var(--font-body); font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--ink-soft); font-size: 0.85rem; margin-top: 2px; }
+.precio-row .monto { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: var(--bordo); white-space: nowrap; }
+.prueba-banner { background: var(--bordo); color: #fff; padding: 28px 30px; max-width: 560px; clip-path: polygon(0 0, 100% 0, 100% 100%, 3% 100%); display: flex; flex-direction: column; gap: 16px; }
+.prueba-banner p { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.01em; color: #fff; }
+
+.horarios-list { max-width: 460px; }
+.horario-row { display: flex; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 1.04rem; }
+.horario-row:last-child { border-bottom: none; }
+.horario-row .dia { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
+.horario-row .hora { color: var(--ink-soft); }
+
+.faq-list { max-width: 720px; }
+.faq-item { padding: 24px 0; border-bottom: 1px solid var(--line); }
+.faq-item:last-child { border-bottom: none; }
+.faq-item h3 { font-size: 1.2rem; margin-bottom: 8px; text-transform: none; }
+.faq-item p { color: var(--ink-soft); font-size: 1rem; }
+.faq-item .confirm { color: var(--bordo); font-weight: 600; }
+
+.cta-section { text-align: center; }
+.cta-section .section-head { margin-left: auto; margin-right: auto; text-align: center; max-width: 520px; }
+.cta-section .btn { margin: 0 auto; }
+
+.provisional-note { max-width: 720px; font-size: 0.85rem; color: var(--ink-soft); opacity: 0.8; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+
+footer { background: var(--ink); color: rgba(255,255,255,0.65); padding: 48px 0 32px; }
+.foot-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 28px; }
+.foot-brand { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; color: #fff; text-transform: uppercase; display: flex; align-items: center; gap: 9px; }
+.foot-brand .dot { width: 9px; height: 9px; background: var(--bordo); border: 1px solid #fff; }
+.foot-brand img { height: 26px; width: auto; display: block; }
+.foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.foot-links a { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: rgba(255,255,255,0.65); transition: color 150ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .foot-links a:hover { color: #fff; } }
+.foot-links .disabled { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: rgba(255,255,255,0.3); }
+.foot-bottom { font-size: 0.78rem; color: rgba(255,255,255,0.35); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+
+.wa-float { position: fixed; bottom: calc(22px + env(safe-area-inset-bottom)); right: calc(22px + env(safe-area-inset-right)); z-index: 400; width: 56px; height: 56px; border-radius: 50%; background: var(--bordo); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px rgba(122,27,60,0.4); transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out); }
+.wa-float:active { transform: scale(0.94); }
+@media (hover: hover) and (pointer: fine) { .wa-float:hover { box-shadow: 0 10px 30px rgba(122,27,60,0.55); } }
+.wa-float svg { width: 26px; height: 26px; }
+
+@media (max-width: 860px) {
+  .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #fff; flex-direction: column; justify-content: center; align-items: center; gap: 30px; z-index: 450; }
+  .nav-links.open { display: flex; }
+  .nav-links a:not(.btn) { font-size: 1.3rem; color: var(--ink); }
+  .burger { display: flex; position: relative; z-index: 460; }
+  section { padding: 88px 0; }
+  .section-head { margin-bottom: 48px; }
+  .stat-row { flex-direction: column; gap: 4px; }
+  .stat-row .v { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .btn, .burger span { transition: none; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <nav class="container">
+    <a href="../index.html" class="logo" id="navLogo"><span class="dot"></span>NR Academia</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html#clases">Clases</a>
+      <a href="../index.html#precios">Precios</a>
+      <a href="../index.html#profe">El profe</a>
+      <a href="../index.html#ubicacion">Dónde estamos</a>
+      <a href="#" class="btn btn-bordo" id="navWaBtn">Reservá tu clase</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="hero-bg" id="heroBg">
+    <img id="heroPoster" src="../assets/clases-chicos-poster.jpg" alt="Clases para chicos en NR Academia" loading="eager">
+  </div>
+  <div class="container hero-content">
+    <a href="../index.html#clases" class="back-link">&larr; Volver a clases</a>
+    <h1>Clases para chicos</h1>
+  </div>
+</section>
+
+<section id="para-quien">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Para quién</span>
+    </div>
+    <div class="para-quien reveal">
+      <p>Para los más chicos que quieren empezar a jugar al pádel, con pelotas y canchas adaptadas a su edad.</p>
+    </div>
+  </div>
+</section>
+
+<section id="trabaja">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Qué se trabaja</span>
+      <h2>En esta clase</h2>
+    </div>
+    <ul class="trabaja-list reveal">
+      <li>Primer contacto con la pala y la pelota, jugando</li>
+      <li>Coordinación y motricidad a través del juego</li>
+      <li>Gusto por el deporte, sin presión ni competencia</li>
+      <li>Trabajo en grupo con otros chicos</li>
+    </ul>
+  </div>
+</section>
+
+<section id="como-es">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cómo es la clase</span>
+    </div>
+    <div class="reveal">
+      <div class="stat-row"><span class="k">Edad mínima</span><span class="v"><span class="confirm">[CONFIRMAR CON NACHO]</span></span></div>
+      <div class="stat-row"><span class="k">Duración</span><span class="v"><span class="confirm">[CONFIRMAR CON NACHO]</span></span></div>
+      <div class="stat-row"><span class="k">Personas por grupo</span><span class="v"><span class="confirm">[CONFIRMAR CON NACHO]</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="precios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Precios</span>
+      <h2>Invertí en tu juego</h2>
+      <p>La clase y la cancha se abonan por separado.</p>
+    </div>
+    <div class="precios-list reveal">
+      <div class="precio-row"><span class="nombre">Clase suelta</span><span class="monto">$10.000</span></div>
+      <div class="precio-row"><span class="nombre">Mes completo<small>8 clases (2 por semana)</small></span><span class="monto">$80.000</span></div>
+      <div class="precio-row"><span class="nombre">Cancha<small>por hora, aparte de la clase</small></span><span class="monto">$24.000</span></div>
+    </div>
+    <div class="prueba-banner reveal">
+      <p>Clase de prueba sin cargo, consultá por WhatsApp</p>
+      <a href="https://wa.me/5493704610720?text=Hola%21%20Quiero%20coordinar%20mi%20clase%20de%20prueba%20en%20NR%20Academia%20%28clases%20para%20chicos%29." class="btn btn-outline" style="border-color:#fff;color:#fff;">Escribir por WhatsApp &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section id="horarios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Horarios</span>
+      <h2>Cuándo podés venir</h2>
+    </div>
+    <div class="horarios-list reveal">
+      <div class="horario-row"><span class="dia">Lunes a viernes</span><span class="hora">8 a 12 y 14 a 20 hs</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2>Lo que más preguntan</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item"><h3>¿Necesita experiencia previa?</h3><p>No, es la clase pensada para arrancar de cero.</p></div>
+      <div class="faq-item"><h3>¿Qué pelotas y palas usan?</h3><p>Pelotas y material adaptado a la edad de cada chico. <span class="confirm">[CONFIRMAR CON NACHO: si el club provee el material o hay que llevarlo]</span></p></div>
+      <div class="faq-item"><h3>¿Los padres pueden quedarse a mirar?</h3><p><span class="confirm">[CONFIRMAR CON NACHO]</span></p></div>
+      <div class="faq-item"><h3>¿Cómo anoto a mi hijo/a?</h3><p>Por WhatsApp.</p></div>
+    </div>
+    <p class="provisional-note">Esta página tiene algunos datos marcados como <strong>[CONFIRMAR CON NACHO]</strong> — todavía pendientes de confirmar antes de la aprobación final del sitio.</p>
+  </div>
+</section>
+
+<section id="reservar" class="cta-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Reservá</span>
+      <h2>Empezá cuando quieras</h2>
+    </div>
+    <a href="https://wa.me/5493704610720?text=Hola%21%20Quiero%20info%20de%20las%20clases%20para%20chicos%20en%20NR%20Academia." class="btn btn-bordo btn-big reveal">Reservar por WhatsApp &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand" id="footBrand"><span class="dot"></span>NR Academia</div>
+      <div class="foot-links">
+        <a href="https://www.tiktok.com/@NACHOROMAN637" target="_blank" rel="noopener">TikTok</a>
+        <a id="footWa" target="_blank" rel="noopener">WhatsApp</a>
+        <span class="disabled">YouTube — Próximamente</span>
+      </div>
+    </div>
+    <div class="foot-bottom">&copy; 2026 NR Academia &middot; Le Club Formosa, Fontana. Sitio en revisión — pendiente de aprobación final.</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5493704610720?text=Hola%21%20Quiero%20info%20de%20las%20clases%20para%20chicos%20en%20NR%20Academia." class="wa-float" id="floatWaBtn" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.45 1.27 4.9L2 22l5.25-1.38a9.96 9.96 0 0 0 4.79 1.22h.01c5.52 0 10-4.48 10-10s-4.49-10-10.01-10zm0 18.17h-.01a8.17 8.17 0 0 1-4.16-1.14l-.3-.18-3.1.81.83-3.03-.2-.31a8.15 8.15 0 0 1-1.26-4.32c0-4.51 3.67-8.18 8.19-8.18 2.19 0 4.24.85 5.79 2.4a8.13 8.13 0 0 1 2.4 5.79c0 4.52-3.67 8.19-8.18 8.19zm4.49-6.13c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.17.25-.64.8-.78.96-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.55c.12.17 1.73 2.64 4.2 3.7.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.66-1.17.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+</a>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const WA_NUMBER = "5493704610720";
+  const WHATSAPP_DISPLAY = "+54 370 461-0720";
+  function waLink(text) { return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text); }
+
+  // ---- Logo ----
+  const logoImg = '<img src="../assets/logo.png" alt="NR Academia">';
+  $('navLogo').innerHTML = logoImg;
+  $('footBrand').innerHTML = logoImg;
+
+  // ---- WhatsApp ----
+  const defaultMsg = "Hola! Quiero info de las clases para chicos en NR Academia.";
+  document.querySelectorAll('#navWaBtn, #floatWaBtn').forEach(el => { el.href = waLink(defaultMsg); });
+  $('footWa').href = waLink(defaultMsg);
+  $('footWa').textContent = WHATSAPP_DISPLAY;
+
+  // ---- Hero video (desktop/mobile) ----
+  const heroVideo = "../assets/clases-chicos.mp4";
+  const heroVideoMobile = "../assets/clases-chicos-mobile.mp4";
+  const heroPoster = "../assets/clases-chicos-poster.jpg";
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData = navigator.connection && navigator.connection.saveData;
+  if (!prefersReducedMotion && !saveData) {
+    const video = document.createElement('video');
+    video.id = 'heroVideo';
+    video.autoplay = true; video.muted = true; video.loop = true; video.playsInline = true;
+    video.setAttribute('aria-hidden', 'true');
+    video.poster = heroPoster;
+    video.innerHTML = `<source src="${heroVideoMobile}" type="video/mp4" media="(max-width: 767px)"><source src="${heroVideo}" type="video/mp4">`;
+    video.addEventListener('playing', () => video.classList.add('ready'));
+    video.addEventListener('error', () => video.remove());
+    $('heroBg').appendChild(video);
+    video.play().catch(() => {});
+  }
+
+  // ---- Nav scroll + burger ----
+  const nav = $('siteNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
+  const burger = $('burgerBtn');
+  const navLinks = $('navLinks');
+  burger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open'); burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Abrir menú');
+  }));
+
+  // ---- Scroll reveal ----
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+})();
+</script>
+</body>
+</html>

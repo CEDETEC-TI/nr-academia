@@ -163,12 +163,12 @@
   }
   .clase-card h3 { font-size: 1.5rem; font-weight: 700; }
   .clase-card p { color: var(--ink-soft); font-size: 0.95rem; flex: 1; font-family: var(--font-body); }
-  .clase-card .consultar {
+  .clase-card .ver-mas {
     align-self: flex-start; font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; text-transform: uppercase; letter-spacing: 0.04em;
     color: var(--bordo); border-bottom: 2px solid transparent; padding-bottom: 2px; transition: border-color 150ms var(--ease-out);
   }
   @media (hover: hover) and (pointer: fine) {
-    .clase-card .consultar:hover { border-color: var(--bordo); }
+    .clase-card:hover .ver-mas { border-color: var(--bordo); }
   }
 
   /* ---------- PRECIOS ---------- */
@@ -505,12 +505,13 @@
   $('footWa').textContent = CONFIG.whatsappDisplay;
 
   // ---- Clases ----
+  const CLASE_SLUGS = { 'Individuales': 'individuales', 'Grupales': 'grupales', 'Para chicos': 'chicos', 'Competencia': 'competencia' };
   $('clasesGrid').innerHTML = CONFIG.clases.map(c => `
-    <div class="clase-card reveal">
+    <a href="clases/${CLASE_SLUGS[c.nombre] || ''}.html" class="clase-card reveal">
       <h3>${esc(c.nombre)}</h3>
       <p>${esc(c.desc)}</p>
-      <a href="${waLink('Hola! Quiero info de las clases ' + c.nombre.toLowerCase() + ' en ' + CONFIG.nombre + '.')}" target="_blank" rel="noopener" class="consultar">Consultar →</a>
-    </div>`).join('');
+      <span class="ver-mas">Ver más →</span>
+    </a>`).join('');
 
   // ---- Precios ----
   const p = CONFIG.precios;
